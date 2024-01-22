@@ -57,6 +57,14 @@ const GlobalStyles = createGlobalStyle`
   --image-opacity: 100%;
 }
 
+@font-face {
+    font-family: 'Proto Mono';
+    src: url('fonts/ProtoMono-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
 *,
 *::before,
 *::after {
