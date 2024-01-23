@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import supabase from "./supabase";
 
 export async function getSettings() {
@@ -7,6 +8,7 @@ export async function getSettings() {
     console.error(error);
     throw new Error("Settings could not be loaded");
   }
+
   return data;
 }
 
@@ -23,5 +25,6 @@ export async function updateSetting(newSetting) {
     console.error(error);
     throw new Error("Settings could not be updated");
   }
-  return data;
+
+  return newSetting;
 }

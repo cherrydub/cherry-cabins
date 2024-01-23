@@ -16,9 +16,9 @@ const StyledSidebar = styled.aside`
 `;
 
 export default function Sidebar() {
-  const { isLoading, cabins, error } = useCabins();
+  // const { isLoading, cabins, error } = useCabins();
 
-  console.log("cabins from sidebar:", cabins);
+  // console.log("cabins from sidebar:", cabins);
   return (
     <StyledSidebar>
       <Logo />
