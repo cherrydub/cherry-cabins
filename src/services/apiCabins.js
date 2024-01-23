@@ -8,6 +8,8 @@ export async function getCabins() {
     throw new Error("Cabins cannot be loaded");
   }
 
+  console.log("getcabins data", data);
+
   return data;
 }
 
@@ -65,12 +67,12 @@ export async function createEditCabin(cabinObj, id) {
 }
 
 export async function deleteCabin(id) {
-  const { data, error } = await supabase.from("cabins").delete().eq("id", id);
+  const { error } = await supabase.from("cabins").delete().eq("id", id);
 
   if (error) {
     console.error(error);
     throw new Error("Cabins cannot be deleted");
   }
 
-  return data;
+  console.log("api data id", id);
 }

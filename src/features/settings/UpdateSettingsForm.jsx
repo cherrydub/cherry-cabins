@@ -26,7 +26,16 @@ function UpdateSettingsForm() {
 
     if (!value) return;
 
-    updateSetting({ [field]: value });
+    updateSetting(
+      { [field]: value },
+      {
+        onSuccess: (data) => {
+          toast.success(`Updated ${settingLabel} to ${Object.values(data)}`);
+        },
+      }
+    );
+    // toast.success("ok updated here");
+    console.log("UpdateSettingForm.jsx", settingLabel);
   }
 
   if (isLoading) return <Spinner />;

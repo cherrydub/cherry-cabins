@@ -11,11 +11,11 @@ export default function useUpdateSetting() {
     mutationFn: updateSettingApi,
     //added param updatedSetting here
     onSuccess: (newSetting) => {
-      toast.info(
-        `${Object.keys(newSetting)} successfully updated to ${Object.values(
-          newSetting
-        )}`
-      );
+      // toast.info(
+      //   `${Object.keys(newSetting)} successfully updated to ${Object.values(
+      //     newSetting
+      //   )}`
+      // );
 
       queryClient.invalidateQueries({
         queryKey: ["settings"],

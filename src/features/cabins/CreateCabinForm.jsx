@@ -45,6 +45,7 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
         { ...data, image: image },
         {
           onSuccess: (data) => {
+            toast.success("another cabin created brehhh");
             console.log("create data here:", data);
             reset();
           },
