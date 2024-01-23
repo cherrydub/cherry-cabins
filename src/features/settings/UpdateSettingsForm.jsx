@@ -26,15 +26,21 @@ function UpdateSettingsForm() {
 
     if (!value) return;
 
+    //this allows to get a somewhat reference value of field, but as the variable name above
+    const currentValue = eval(field);
+
     updateSetting(
       { [field]: value },
       {
         onSuccess: (data) => {
-          toast.success(`Updated ${settingLabel} to ${Object.values(data)}`);
+          const updatedValue = Object.values(data)[0];
+          toast.info(
+            `${settingLabel} updated from ${currentValue} to ${updatedValue}`
+          );
         },
       }
     );
-    // toast.success("ok updated here");
+
     console.log("UpdateSettingForm.jsx", settingLabel);
   }
 
