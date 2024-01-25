@@ -21,19 +21,16 @@ function UpdateSettingsForm() {
 
   const { isUpdating, updateSetting } = useUpdateSetting();
 
-  function handleUpdate(e, field, settingLabel) {
+  function handleUpdate(e, field, settingLabel, currentValue) {
     const { value } = e.target;
 
     if (!value) return;
-
-    //this allows to get a somewhat reference value of field, but as the variable name above
-    const currentValue = eval(field);
 
     updateSetting(
       { [field]: value },
       {
         onSuccess: (data) => {
-          const updatedValue = Object.values(data)[0];
+          const updatedValue = data[field];
           toast.info(
             `${settingLabel} updated from ${currentValue} to ${updatedValue}`
           );
@@ -55,7 +52,12 @@ function UpdateSettingsForm() {
           disabled={isUpdating}
           defaultValue={minBookingLength}
           onBlur={(e) =>
-            handleUpdate(e, "minBookingLength", "Minimum nights/booking")
+            handleUpdate(
+              e,
+              "minBookingLength",
+              "Minimum nights/booking",
+              minBookingLength
+            )
           }
         />
       </FormRow>
@@ -66,7 +68,12 @@ function UpdateSettingsForm() {
           defaultValue={maxBookingLength}
           disabled={isUpdating}
           onBlur={(e) =>
-            handleUpdate(e, "maxBookingLength", "Maximum nights/booking")
+            handleUpdate(
+              e,
+              "maxBookingLength",
+              "Maximum nights/booking",
+              maxBookingLength
+            )
           }
         />
       </FormRow>
@@ -77,7 +84,12 @@ function UpdateSettingsForm() {
           disabled={isUpdating}
           defaultValue={maxGuestsPerBooking}
           onBlur={(e) =>
-            handleUpdate(e, "maxGuestsPerBooking", "Maximum guests/booking")
+            handleUpdate(
+              e,
+              "maxGuestsPerBooking",
+              "Maximum guests/booking",
+              maxGuestsPerBooking
+            )
           }
         />
       </FormRow>
@@ -87,7 +99,9 @@ function UpdateSettingsForm() {
           id="breakfast-price"
           disabled={isUpdating}
           defaultValue={breakfastPrice}
-          onBlur={(e) => handleUpdate(e, "breakfastPrice", "Breakfast price")}
+          onBlur={(e) =>
+            handleUpdate(e, "breakfastPrice", "Breakfast price", breakfastPrice)
+          }
         />
       </FormRow>
     </Form>
