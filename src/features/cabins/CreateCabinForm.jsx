@@ -12,7 +12,7 @@ import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import useEditCabin from "./useEditCabin";
 
-export default function CreateCabinForm({ cabinToEdit = {} }) {
+export default function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isEditing, editCabin } = useEditCabin();
   const isWorking = isCreating || isEditing;
@@ -45,9 +45,10 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
         { ...data, image: image },
         {
           onSuccess: (data) => {
-            toast.success("another cabin created brehhh");
+            // toast.success("another cabin created brehhh");
             console.log("create data here:", data);
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -58,7 +59,10 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? "modal" : "regular"}
+    >
       <FormRow label="Name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -69,7 +73,6 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
           })}
         />
       </FormRow>
-
       <FormRow label="Max Capacity" error={errors?.maxCapacity?.message}>
         <Input
           type="number"
@@ -84,7 +87,6 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
           })}
         />
       </FormRow>
-
       <FormRow label="Regular Price" error={errors?.regularPrice?.message}>
         <Input
           type="number"
@@ -99,7 +101,6 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
           })}
         />
       </FormRow>
-
       <FormRow label="Discount" error={errors?.discount?.message}>
         <Input
           type="number"
@@ -114,7 +115,6 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
           })}
         />
       </FormRow>
-
       <FormRow label="Description" error={errors?.description?.message}>
         <Textarea
           type="text"
@@ -126,7 +126,6 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
           })}
         />
       </FormRow>
-
       <FormRow label="Cabin photo" error={errors?.image?.message}>
         <FileInput
           id="image"
@@ -136,10 +135,13 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
           })}
         />
       </FormRow>
-
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button
+          onClick={() => onCloseModal?.()}
+          variation="secondary"
+          type="reset"
+        >
           Cancel
         </Button>
         <Button disabled={isWorking}>
