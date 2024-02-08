@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -84,20 +85,22 @@ function Open({ children, opens: opensWindowName }) {
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
 
-  const ref = useRef();
+  const ref = useOutsideClick(close);
 
-  useEffect(() => {
-    function handleClick(e) {
-      if (ref.current && !ref.current.contains(e.target)) {
-        console.log("click outside");
-        close();
-      }
-    }
+  // const ref = useRef();
 
-    document.addEventListener("click", handleClick, true);
+  // useEffect(() => {
+  //   function handleClick(e) {
+  //     if (ref.current && !ref.current.contains(e.target)) {
+  //       console.log("click outside");
+  //       close();
+  //     }
+  //   }
 
-    return () => document.removeEventListener("click", handleClick, true);
-  }, [close]);
+  //   document.addEventListener("click", handleClick, true);
+
+  //   return () => document.removeEventListener("click", handleClick, true);
+  // }, [close]);
 
   if (name !== openName) return null;
 
