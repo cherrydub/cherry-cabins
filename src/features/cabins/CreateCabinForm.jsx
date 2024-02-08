@@ -37,6 +37,7 @@ export default function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           onSuccess: (data) => {
             console.log("edit data here:", data);
             reset();
+            onCloseModal?.();
           },
         }
       );
