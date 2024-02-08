@@ -3,8 +3,6 @@ import React, {
   cloneElement,
   createContext,
   useContext,
-  useEffect,
-  useRef,
   useState,
 } from "react";
 import { HiXMark } from "react-icons/hi2";
